@@ -10,3 +10,11 @@ export async function middleware(request: NextRequest) {
     await routeMiddleware(request);
   }
 }
+
+export const config = {
+  matcher: [
+    // Skip all internal paths (_next)
+    "/((?!_next).*)",
+    "/((?!favicon))",
+  ],
+};

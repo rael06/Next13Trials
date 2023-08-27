@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import classes from "./SearchBar.component.module.css";
 import { useRouter } from "next/navigation";
 import { computeSearchSlugRoute } from "@/app/(pages)/search/[slug]/utils";

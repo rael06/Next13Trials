@@ -7,6 +7,7 @@ export async function revalidate(
   { maxAgeMs }: { maxAgeMs: number }
 ) {
   if (process.env.NODE_ENV === "development") {
+    console.warn("revalidate middleware is not supported in development");
     return;
   }
 
@@ -14,7 +15,7 @@ export async function revalidate(
   if (lastRevalidationDate < Date.now() - maxAgeMs) {
     revalidationDates[request.nextUrl.pathname] = Date.now();
     await fetch(
-      `${request.nextUrl.protocol}//${request.nextUrl.host}/api/revalidate?secret=my_secret_token&path=${request.nextUrl.pathname}`
+      `${request.nextUrl.protocol}//${request.nextUrl.host}/api/revalidate?secret=${process.env.APPLICATION_PRIVATE_KEY}&path=${request.nextUrl.pathname}`
     );
     return;
   }

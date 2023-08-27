@@ -6,6 +6,10 @@ export async function revalidate(
   request: NextRequest,
   { maxAgeMs }: { maxAgeMs: number }
 ) {
+  if (process.env.NODE_ENV === "development") {
+    return;
+  }
+
   const lastRevalidationDate = revalidationDates[request.nextUrl.pathname] || 0;
   if (lastRevalidationDate < Date.now() - maxAgeMs) {
     revalidationDates[request.nextUrl.pathname] = Date.now();

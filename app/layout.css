@@ -1,0 +1,17 @@
+@import "./variables.css";
+
+header {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  height: var(--header-height);
+}
+
+main {
+  height: calc(100vh - (var(--header-height) + var(--footer-height)));
+}
+
+footer {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  height: var(--footer-height);
+}

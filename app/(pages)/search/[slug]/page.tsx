@@ -1,17 +1,17 @@
-import classes from "./movies.search.page.module.css";
+import classes from "./search.[slug].page.module.css";
 
 type Props = {
   params: {
-    search: string;
+    slug: string;
   };
 };
 
 export default async function Page(props: Props) {
-  const search = `${props.params.search}-${new Date().toISOString()}`;
+  const searchText = `${props.params.slug}-${new Date().toISOString()}`;
 
   return (
     <section className={classes.root}>
-      <p>Page movies works! Search is {`${search}`}</p>
+      <p>Page search works! Slug is {`${searchText}`}</p>
     </section>
   );
 }

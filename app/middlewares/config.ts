@@ -1,13 +1,6 @@
-import { Middleware } from "./core";
+import { MiddlewaresConfig } from "./core";
 import { revalidate } from "./revalidate";
 
-export const middlewaresConfig: Record<
-  string,
-  {
-    middlewares: Middleware[];
-  }
-> = {
-  "^/movies/[a-z-]+$": {
-    middlewares: [(request) => revalidate(request, { maxAgeMs: 3000 })],
-  },
+export const middlewaresConfig: MiddlewaresConfig = {
+  "^/movies/[a-z-]+$": [(request) => revalidate(request, { maxAgeMs: 3000 })],
 };

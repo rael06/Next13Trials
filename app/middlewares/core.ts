@@ -1,18 +1,20 @@
 import { NextRequest } from "next/server";
 import { middlewaresConfig } from "./config";
 
-export type Middleware = (
+type Middleware = (
   request: NextRequest & unknown
 ) => Promise<unknown> | unknown;
+
+export type MiddlewaresConfig = Record<string, Middleware[]>;
 
 const computedMiddlewaresConfig: Map<RegExp, Middleware[]> =
   computeMiddlewaresConfig(middlewaresConfig);
 
 function computeMiddlewaresConfig(
-  middlewaresConfig: Record<string, { middlewares: Middleware[] }>
+  middlewaresConfig: Record<string, Middleware[]>
 ) {
   const computedMiddlewaresConfig = new Map<RegExp, Middleware[]>();
-  for (const [regex, { middlewares }] of Object.entries(middlewaresConfig)) {
+  for (const [regex, middlewares] of Object.entries(middlewaresConfig)) {
     computedMiddlewaresConfig.set(new RegExp(regex), middlewares);
   }
   return computedMiddlewaresConfig;

@@ -1,4 +1,4 @@
-import { SEARCH_SLUG_STRING_REGEX } from "@/app/(pages)/search/[slug]/utils";
+import { SEARCH_SLUG_STRING_REGEX } from "@/app/(pages)/[lang]/search/[slug]/utils";
 import { MiddlewaresConfig } from "./core";
 import { revalidate } from "./revalidate";
 import { languageRedirect } from "./languageRedirect";

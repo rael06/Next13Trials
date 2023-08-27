@@ -3,7 +3,7 @@
 import React from "react";
 import classes from "./SearchBar.component.module.css";
 import { useRouter } from "next/navigation";
-import { computeSearchSlugRoute } from "@/app/(pages)/search/[slug]/utils";
+import { computeSearchSlugRoute } from "@/app/(pages)/[lang]/search/[slug]/utils";
 
 export default function SearchBar() {
   const searchInputRef = React.useRef<HTMLInputElement>(null);

@@ -1,11 +1,11 @@
-import { SEARCH_SLUG_STRING_REGEX } from "@/app/(pages)/[lang]/search/[slug]/utils";
 import { MiddlewaresConfig } from "./core";
 import { revalidate } from "./revalidate";
 import { languageRedirect } from "./languageRedirect";
+import { sluggedMoviesRouteUtils } from "../(pages)/[lang]/movies/[id]/utils";
 
 export const middlewaresConfig: MiddlewaresConfig = {
-  [SEARCH_SLUG_STRING_REGEX]: [
-    (request) => revalidate(request, { maxAgeMs: 1000 * 3 }),
+  [sluggedMoviesRouteUtils.strRegex]: [
+    (request) => revalidate(request, { maxAgeMs: 1000 * 20 }),
   ],
   "/.*": [languageRedirect],
 };

@@ -1,17 +1,17 @@
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { SUPPORTED_LOCALES, SupportedLocale } from "@/app/helpers/lang";
+import LocaleHelper, { SupportedLocale } from "../helpers/locale";
 
-export async function languageRedirect(request: NextRequest) {
+export async function redirectToLocale(request: NextRequest) {
   // Get the preferred locale, similar to above or using a library
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = SUPPORTED_LOCALES.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  const isPathnameMissingLocale = !LocaleHelper.supportedLocales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
   // Redirect if there is no locale
-  if (!pathnameIsMissingLocale) {
+  if (!isPathnameMissingLocale) {
     return NextResponse.next();
   }
 
@@ -26,13 +26,7 @@ function getLocale(request: NextRequest): SupportedLocale {
   const acceptLanguageHeader = request.headers.get("Accept-Language");
   const acceptLanguage = acceptLanguageHeader
     ? acceptLanguageHeader.split(",")[0]
-    : "en-US";
+    : SupportedLocale.en_US;
   const locale = acceptLanguage.split("-")[0];
-  return (
-    SUPPORTED_LOCALES.find((supportedLocale) => supportedLocale === locale) ||
-    SUPPORTED_LOCALES.find((supportedLocale) =>
-      supportedLocale.startsWith(locale)
-    ) ||
-    SupportedLocale.en_US
-  );
+  return LocaleHelper.retrieveSupportedLocale(locale) || SupportedLocale.en_US;
 }

@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import MainContextProvider from "@/app/contexts";
-import { SupportedLocale } from "@/app/helpers/lang";
+import { SupportedLocale } from "@/app/helpers/locale";
 import ParamsHelper from "@/app/helpers/params";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
 type Props = {
   children: React.ReactNode;
   params: {
-    lang: SupportedLocale;
+    locale: SupportedLocale;
   };
 };
 
 export default function RootLayout({ children, params }: Props) {
-  const lang = ParamsHelper.getUnique(params?.lang);
+  const locale = params.locale;
 
   return (
-    <html lang={lang}>
+    <html lang={locale}>
       <body className={inter.className}>
         <MainContextProvider>
           <Header />

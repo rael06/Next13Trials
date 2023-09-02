@@ -1,9 +1,8 @@
 import { fetchMovies } from "@/app/services/api/tmdb";
 import classes from "./search.[slug].page.module.css";
-import { SupportedLocale } from "@/app/utils/lang";
+import { SupportedLocale } from "@/app/helpers/lang";
 import { getDictionary } from "@/app/(pages)/[lang]/dictionaries";
 import Link from "next/link";
-import { sluggedMoviesRouteUtils } from "../../movies/[id]/utils";
 
 type Props = {
   params: {

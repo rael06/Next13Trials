@@ -1,4 +1,4 @@
-@import "./variables.css";
+@import "@/app/variables.css";
 
 header {
   padding-top: var(--spacing-md);

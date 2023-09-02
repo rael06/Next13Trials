@@ -1,6 +1,6 @@
 import { Movie } from "@/app/models/Movie";
 import { SearchMoviesResult } from "@/app/models/SearchMoviesResult";
-import { SupportedLocale } from "@/app/utils/lang";
+import { SupportedLocale } from "@/app/helpers/lang";
 
 const baseUrl = "https://api.themoviedb.org/3";
 const apiKey = process.env.TMDB_API_KEY;

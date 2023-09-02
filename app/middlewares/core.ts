@@ -1,9 +1,9 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { middlewaresConfig } from "./config";
 
 type Middleware = (
   request: NextRequest & unknown
-) => Promise<unknown> | unknown;
+) => Promise<NextResponse<unknown> | undefined>;
 
 export type MiddlewaresConfig = Record<string, Middleware[]>;
 

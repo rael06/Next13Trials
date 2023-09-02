@@ -3,11 +3,17 @@
 import React from "react";
 import classes from "./SearchBar.component.module.css";
 import { useRouter } from "next/navigation";
-import { sluggedSearchRouteUtils } from "@/app/(pages)/[lang]/search/[searchText]/utils";
 
 export default function SearchBar() {
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const goToSearchResultsPage = React.useCallback(
+    (searchText: string) => {
+      router.push(`search/${searchText}`);
+    },
+    [router]
+  );
 
   const handleSubmit = React.useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,9 +23,9 @@ export default function SearchBar() {
         return;
       }
 
-      router.push(sluggedSearchRouteUtils.getSluggedRoute(searchText));
+      goToSearchResultsPage(searchText);
     },
-    [router]
+    [goToSearchResultsPage]
   );
 
   const handleKeyDown = React.useCallback(
@@ -30,10 +36,10 @@ export default function SearchBar() {
           return;
         }
 
-        router.push(sluggedSearchRouteUtils.getSluggedRoute(searchText));
+        goToSearchResultsPage(searchText);
       }
     },
-    [router]
+    [goToSearchResultsPage]
   );
 
   return (

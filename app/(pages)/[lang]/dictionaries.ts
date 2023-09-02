@@ -1,4 +1,4 @@
-import { SupportedLocale } from "@/app/utils/lang";
+import { SupportedLocale } from "@/app/helpers/lang";
 import "server-only";
 
 const dictionaries = {

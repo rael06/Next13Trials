@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const revalidationDates: Record<string, number> = {};
 
@@ -8,7 +8,7 @@ export async function revalidate(
 ) {
   if (process.env.NODE_ENV === "development") {
     console.warn("revalidate middleware is not supported in development");
-    return;
+    return NextResponse.next();
   }
 
   const lastRevalidationDate = revalidationDates[request.nextUrl.pathname] || 0;
@@ -17,6 +17,6 @@ export async function revalidate(
     await fetch(
       `${request.nextUrl.protocol}//${request.nextUrl.host}/api/revalidate?secret=${process.env.APPLICATION_PRIVATE_KEY}&path=${request.nextUrl.pathname}`
     );
-    return;
+    return NextResponse.next();
   }
 }

@@ -1,6 +1,6 @@
 import { fetchMovie } from "@/app/services/api/tmdb";
 import classes from "./movies.[slug].page.module.css";
-import { SupportedLocale } from "@/app/utils/lang";
+import { SupportedLocale } from "@/app/helpers/lang";
 import { getDictionary } from "@/app/(pages)/[lang]/dictionaries";
 
 type Props = {

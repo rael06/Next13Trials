@@ -1,7 +1,11 @@
+import classes from "./Header.component.module.css";
+import LocaleSelector from "../LocaleSelector";
+
 export default function Header() {
   return (
-    <header>
-      <h1> My movie app</h1>
+    <header className={classes.root}>
+      <h1>My movie app</h1>
+      <LocaleSelector />
     </header>
   );
 }

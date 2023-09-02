@@ -10,13 +10,13 @@ export default class LocaleHelper {
   public static retrieveSupportedLocale(
     locale: string
   ): SupportedLocale | undefined {
-    const result =
+    return (
       LocaleHelper.supportedLocales.find(
         (supportedLocale) => supportedLocale === locale
       ) ||
       LocaleHelper.supportedLocales.find((supportedLocale) =>
         supportedLocale.startsWith(locale)
-      );
-    return result;
+      )
+    );
   }
 }

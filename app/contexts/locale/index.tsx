@@ -30,7 +30,6 @@ export default function LocaleContextProvider({ children }: Props) {
     const locale = ParamsHelper.getSingle(params.locale);
 
     const supportedLocale = LocaleHelper.retrieveSupportedLocale(locale);
-    if (!supportedLocale) return;
 
     LocalStorage.set(LocalStorageKey.locale, supportedLocale);
     setLocaleState(supportedLocale);

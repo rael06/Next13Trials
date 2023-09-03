@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const revalidationDates: Record<string, number> = {};
 
-export async function revalidate(
+export async function revalidateOnTime(
   request: NextRequest,
   { maxAgeMs }: { maxAgeMs: number }
 ) {

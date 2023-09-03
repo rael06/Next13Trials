@@ -28,5 +28,6 @@ function getLocale(request: NextRequest): SupportedLocale {
     ? acceptLanguageHeader.split(",")[0]
     : SupportedLocale.en_US;
   const locale = acceptLanguage.split("-")[0];
-  return LocaleHelper.retrieveSupportedLocale(locale) || SupportedLocale.en_US;
+
+  return LocaleHelper.retrieveSupportedLocale(locale);
 }

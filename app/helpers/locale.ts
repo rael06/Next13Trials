@@ -7,16 +7,15 @@ export default class LocaleHelper {
   public static readonly defaultLocale = SupportedLocale.en_US;
   public static readonly supportedLocales = Object.values(SupportedLocale);
 
-  public static retrieveSupportedLocale(
-    locale: string
-  ): SupportedLocale | undefined {
+  public static retrieveSupportedLocale(locale: string): SupportedLocale {
     return (
       LocaleHelper.supportedLocales.find(
         (supportedLocale) => supportedLocale === locale
       ) ||
       LocaleHelper.supportedLocales.find((supportedLocale) =>
         supportedLocale.startsWith(locale)
-      )
+      ) ||
+      LocaleHelper.defaultLocale
     );
   }
 }

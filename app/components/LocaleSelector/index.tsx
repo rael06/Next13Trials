@@ -19,11 +19,13 @@ export default function LocaleSelector() {
 
     if (!selectedLocale || !pathname) return;
 
-    const isSelectedLocaleValid =
-      !!LocaleHelper.retrieveSupportedLocale(selectedLocale);
-    if (!isSelectedLocaleValid) return;
+    const validSelectedLocale =
+      LocaleHelper.retrieveSupportedLocale(selectedLocale);
 
-    const newUrl = pathname.replace(`/${currentLocale}`, `/${selectedLocale}`);
+    const newUrl = pathname.replace(
+      `/${currentLocale}`,
+      `/${validSelectedLocale}`
+    );
     router.push(newUrl);
   }
 

@@ -3,21 +3,21 @@ import classes from "./movies.[slug].page.module.css";
 import { SupportedLocale } from "@/app/helpers/locale";
 import { getDictionary } from "@/app/(pages)/[locale]/dictionaries";
 import MovieCard from "@/app/components/MovieCard";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: {
     locale: SupportedLocale;
-    movieId: number;
+    movieId: string;
   };
 };
 
 export default async function Page({ params }: Props) {
   const { locale, movieId } = params;
   const dict = await getDictionary(locale);
-  const movie = await fetchMovie(locale, movieId);
+  const movie = await fetchMovie(locale, Number(movieId));
   if (!movie) {
-    redirect(`/${locale}/movies/${movieId}/404`);
+    notFound();
   }
 
   return (

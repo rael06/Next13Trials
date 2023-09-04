@@ -32,3 +32,8 @@ export default async function Page({ params }: Props) {
     </section>
   );
 }
+
+export const metadata = {
+  title: "Search",
+  description: "Search page",
+};

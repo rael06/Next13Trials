@@ -33,3 +33,11 @@ export default async function Page({ params }: Props) {
 export async function generateStaticParams() {
   return [];
 }
+
+export async function generateMetadata({ params }: Props) {
+  const dict = await getDictionary(params.locale);
+  return {
+    title: dict.page.movie.title,
+    description: dict.page.movie.description,
+  };
+}

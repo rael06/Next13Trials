@@ -6,10 +6,10 @@ export async function revalidateOnTime(
   request: NextRequest,
   { maxAgeMs }: { maxAgeMs: number }
 ) {
-  if (process.env.NODE_ENV === "development") {
-    console.warn("revalidate middleware is not supported in development");
-    return NextResponse.next();
-  }
+  // if (process.env.NODE_ENV === "development") {
+  //   console.warn("revalidate middleware is not supported in development");
+  //   return NextResponse.next();
+  // }
 
   const lastRevalidationDate = revalidationDates[request.nextUrl.pathname] || 0;
   if (lastRevalidationDate < Date.now() - maxAgeMs) {

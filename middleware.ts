@@ -14,6 +14,10 @@ export async function middleware(request: NextRequest) {
       return response;
     }
 
+    if (response?.status === 404) {
+      return response;
+    }
+
     nextResponses.push(response);
   }
 

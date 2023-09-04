@@ -1,3 +1,17 @@
 {
+  "page": {
+    "search": {
+      "title": "Search",
+      "description": "This is the search page. You can search for movies by title."
+    },
+    "movie": {
+      "title": "Movie",
+      "description": "This is the movie page. You can find details of the movie."
+    },
+    "home": {
+      "title": "Home",
+      "description": "Welcome to the home page of the movie search app. You can search for movies by title, or by actor."
+    }
+  },
   "movies-results": "Here are the results of your search: "
 }

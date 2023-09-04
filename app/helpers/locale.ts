@@ -18,4 +18,8 @@ export default class LocaleHelper {
       LocaleHelper.defaultLocale
     );
   }
+
+  public static isLocaleSupported(locale: string): boolean {
+    return LocaleHelper.supportedLocales.includes(locale as SupportedLocale);
+  }
 }

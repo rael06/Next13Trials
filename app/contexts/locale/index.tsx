@@ -35,9 +35,9 @@ export default function LocaleContextProvider({ children }: Props) {
     setLocaleState(supportedLocale);
   }, [params?.locale]);
 
-  function setLocale(lang: SupportedLocale) {
-    LocalStorage.set(LocalStorageKey.locale, lang);
-    setLocaleState(lang);
+  function setLocale(locale: SupportedLocale) {
+    LocalStorage.set(LocalStorageKey.locale, locale);
+    setLocaleState(locale);
   }
 
   return (

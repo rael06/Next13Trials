@@ -6,43 +6,43 @@ import ParamsHelper from "@/app/helpers/params";
 import { useParams } from "next/navigation";
 import React from "react";
 
-type LocaleContextType = {
-  locale: SupportedLocale;
-  setLocale: (lang: SupportedLocale) => void;
+type LocalStorageContextType = {
+  locale: { get: SupportedLocale; set: (locale: SupportedLocale) => void };
 };
 
-export const LocaleContext = React.createContext<LocaleContextType>(undefined!);
+export const LocalStorageContext = React.createContext<LocalStorageContextType>(
+  undefined!
+);
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function LocaleContextProvider({ children }: Props) {
+export default function LocalStorageContextProvider({ children }: Props) {
   const params = useParams();
 
   const [localeState, setLocaleState] = React.useState<SupportedLocale>(
     SupportedLocale.en_US
   );
 
-  React.useEffect(() => {
-    if (!params?.locale) return;
-
-    const locale = ParamsHelper.getSingle(params.locale);
-
-    const supportedLocale = LocaleHelper.retrieveSupportedLocale(locale);
-
-    LocalStorage.set(LocalStorageKey.locale, supportedLocale);
-    setLocaleState(supportedLocale);
-  }, [params?.locale]);
-
   function setLocale(locale: SupportedLocale) {
     LocalStorage.set(LocalStorageKey.locale, locale);
     setLocaleState(locale);
   }
 
+  React.useEffect(() => {
+    if (!params?.locale) return;
+
+    const locale = ParamsHelper.getSingle(params.locale);
+    const supportedLocale = LocaleHelper.retrieveSupportedLocale(locale);
+    setLocale(supportedLocale);
+  }, [params?.locale]);
+
   return (
-    <LocaleContext.Provider value={{ locale: localeState, setLocale }}>
+    <LocalStorageContext.Provider
+      value={{ locale: { get: localeState, set: setLocale } }}
+    >
       {children}
-    </LocaleContext.Provider>
+    </LocalStorageContext.Provider>
   );
 }

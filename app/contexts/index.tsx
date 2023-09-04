@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import LocaleContextProvider from "./locale";
+import LocalStorageContextProvider from "./localStorage";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
 export default function MainContext({ children }: Props) {
   return (
     <>
-      <LocaleContextProvider>{children}</LocaleContextProvider>
+      <LocalStorageContextProvider>{children}</LocalStorageContextProvider>
     </>
   );
 }

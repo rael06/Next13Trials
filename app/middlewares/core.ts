@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { middlewaresConfig } from "./config";
+import { pathToRegexp } from "path-to-regexp";
 
 type Middleware = (
   request: NextRequest & unknown
@@ -14,8 +15,9 @@ function computeMiddlewaresConfig(
   middlewaresConfig: Record<string, Middleware[]>
 ) {
   const computedMiddlewaresConfig = new Map<RegExp, Middleware[]>();
-  for (const [regex, middlewares] of Object.entries(middlewaresConfig)) {
-    computedMiddlewaresConfig.set(new RegExp(regex), middlewares);
+  for (const [regexStr, middlewares] of Object.entries(middlewaresConfig)) {
+    const regex = pathToRegexp(regexStr);
+    computedMiddlewaresConfig.set(regex, middlewares);
   }
   return computedMiddlewaresConfig;
 }

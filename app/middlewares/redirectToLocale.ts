@@ -5,6 +5,11 @@ import LocaleHelper, { SupportedLocale } from "../helpers/locale";
 export async function redirectToLocale(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  const isApiRoute = pathname.startsWith("/api/") || pathname === "/api";
+  if (isApiRoute) {
+    return NextResponse.next();
+  }
+
   const isPathnameMissingLocale = !LocaleHelper.supportedLocales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );

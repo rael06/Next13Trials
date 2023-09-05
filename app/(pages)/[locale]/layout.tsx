@@ -40,9 +40,3 @@ export default function RootLayout({ children, params }: Props) {
     </html>
   );
 }
-
-export const dynamicParams = false;
-
-export async function generateStaticParams() {
-  return [SupportedLocale.en_US, SupportedLocale.fr_FR];
-}

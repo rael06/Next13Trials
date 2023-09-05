@@ -22,4 +22,14 @@ export default class LocaleHelper {
   public static isLocaleSupported(locale: string): boolean {
     return LocaleHelper.supportedLocales.includes(locale as SupportedLocale);
   }
+
+  public static injectValues(
+    phrase: string,
+    values: Record<string, string>
+  ): string {
+    return Object.entries(values).reduce(
+      (acc, [key, value]) => acc.replace(`{{${key}}}`, value),
+      phrase
+    );
+  }
 }

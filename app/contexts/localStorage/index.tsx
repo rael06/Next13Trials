@@ -7,11 +7,14 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 type LocalStorageContextType = {
-  locale: { get: SupportedLocale; set: (locale: SupportedLocale) => void };
+  localeItem: {
+    value: SupportedLocale;
+    setValue: (locale: SupportedLocale) => void;
+  };
 };
 
-export const LocalStorageContext = React.createContext<LocalStorageContextType>(
-  undefined!
+export const LocalStorageContext = React.createContext(
+  {} as LocalStorageContextType
 );
 
 type Props = {
@@ -40,7 +43,7 @@ export default function LocalStorageContextProvider({ children }: Props) {
 
   return (
     <LocalStorageContext.Provider
-      value={{ locale: { get: localeState, set: setLocale } }}
+      value={{ localeItem: { value: localeState, setValue: setLocale } }}
     >
       {children}
     </LocalStorageContext.Provider>

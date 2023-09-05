@@ -10,24 +10,30 @@ export const fallbackImageUrl = "/images/movie-fallback.png";
 export async function fetchMovies(
   locale: SupportedLocale,
   search: string
-): Promise<SearchMoviesResult> {
-  return fetch(
-    `${baseUrl}/search/movie?api_key=${apiKey}&language=${locale}&query=${search}&page=1&include_adult=false`
-  ).then(async (res) => await res.json()) as Promise<SearchMoviesResult>;
+): Promise<SearchMoviesResult | null> {
+  const url = `${baseUrl}/search/movie?api_key=${apiKey}&language=${locale}&query=${search}&page=1&include_adult=false`;
+  return fetchTmdb<SearchMoviesResult>(url);
 }
 
 export async function fetchMovie(
   locale: SupportedLocale,
   id: number
 ): Promise<Movie | null> {
-  return fetch(
-    `${baseUrl}/movie/${id}?api_key=${apiKey}&language=${locale}`
-  ).then(async (res) => {
-    if (res.status >= 400) return null;
-    return await res.json();
-  }) as Promise<Movie | null>;
+  const url = `${baseUrl}/movie/${id}?api_key=${apiKey}&language=${locale}`;
+  return fetchTmdb<Movie>(url);
 }
 
 export function getImage(path: string) {
   return path ? `https://image.tmdb.org/t/p/w500/${path}` : fallbackImageUrl;
+}
+
+async function fetchTmdb<T>(url: string): Promise<T | null> {
+  return fetch(url).then(async (res) => {
+    const responseBody = await res.json();
+    if (responseBody.success === false) {
+      return null;
+    }
+
+    return responseBody;
+  }) as Promise<T | null>;
 }

@@ -1,11 +1,11 @@
 {
   "page": {
     "search": {
-      "title": "Recherche",
+      "title": "Recherche - {{searchText}}",
       "description": "Recherche de films"
     },
     "movie": {
-      "title": "Film",
+      "title": "Film - {{movieTitle}}",
       "description": "Détails du film"
     },
     "home": {

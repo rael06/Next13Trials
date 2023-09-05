@@ -1,6 +1,6 @@
 import { fetchMovies } from "@/app/services/api/tmdb";
 import classes from "./search.[slug].page.module.css";
-import { SupportedLocale } from "@/app/helpers/locale";
+import LocaleHelper, { SupportedLocale } from "@/app/helpers/locale";
 import { getDictionary } from "@/app/(pages)/[locale]/dictionaries";
 import Link from "next/link";
 
@@ -13,7 +13,8 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { locale, searchText } = params;
-  const movies = await fetchMovies(locale, searchText);
+  const searchMoviesResponse = await fetchMovies(locale, searchText);
+  const movies = searchMoviesResponse?.results || [];
   const dict = await getDictionary(locale);
 
   return (
@@ -23,7 +24,7 @@ export default async function Page({ params }: Props) {
       </p>
       <p>{dict["movies-results"]}</p>
       <ul>
-        {movies.results?.map((movie) => (
+        {movies.map((movie) => (
           <li key={movie.id}>
             <Link href={`/${locale}/movies/${movie.id}`}>{movie.title}</Link>
           </li>
@@ -33,7 +34,13 @@ export default async function Page({ params }: Props) {
   );
 }
 
-export const metadata = {
-  title: "Search",
-  description: "Search page",
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale, searchText } = params;
+  const dict = await getDictionary(locale);
+  return {
+    title: LocaleHelper.injectValues(dict.page.search.title, {
+      searchText,
+    }),
+    description: dict.page.search.description,
+  };
+}

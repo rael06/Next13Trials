@@ -1,18 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./SearchBar.component.module.css";
 import { useRouter } from "next/navigation";
+import { LocalStorageContext } from "@/app/contexts/localStorage";
 
 export default function SearchBar() {
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { localeItem } = useContext(LocalStorageContext);
+  const locale = localeItem.value;
 
   const goToSearchResultsPage = React.useCallback(
     (searchText: string) => {
-      router.push(`search/${searchText}`);
+      router.push(`/${locale}/search/${searchText}`);
     },
-    [router]
+    [router, locale]
   );
 
   const handleSubmit = React.useCallback(

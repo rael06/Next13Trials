@@ -1,11 +1,11 @@
 {
   "page": {
     "search": {
-      "title": "Search",
+      "title": "Search - {{searchText}}",
       "description": "This is the search page. You can search for movies by title."
     },
     "movie": {
-      "title": "Movie",
+      "title": "Movie - {{movieTitle}}",
       "description": "This is the movie page. You can find details of the movie."
     },
     "home": {

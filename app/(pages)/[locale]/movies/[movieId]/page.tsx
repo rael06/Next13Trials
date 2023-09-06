@@ -1,6 +1,6 @@
 import { fetchMovie } from "@/app/services/api/tmdb";
 import classes from "./movies.[slug].page.module.css";
-import { SupportedLocale } from "@/app/helpers/locale";
+import LocaleHelper, { SupportedLocale } from "@/app/helpers/locale";
 import { getDictionary } from "@/app/(pages)/[locale]/dictionaries";
 import MovieCard from "@/app/components/MovieCard";
 import { notFound } from "next/navigation";
@@ -35,9 +35,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const dict = await getDictionary(params.locale);
+  const { locale, movieId } = params;
+  const dict = await getDictionary(locale);
+  const movie = await fetchMovie(locale, Number(movieId));
   return {
-    title: dict.page.movie.title,
+    title: LocaleHelper.injectValues(dict.page.movie.title, {
+      movieTitle: movie?.title || "",
+    }),
     description: dict.page.movie.description,
   };
 }

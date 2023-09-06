@@ -10,6 +10,6 @@ const supportedLocaleSegment = `:locale((?:${LocaleHelper.supportedLocales.join(
 export const middlewaresConfig: MiddlewaresConfig = {
   "/(.*)": [redirectToLocale],
   [`/${supportedLocaleSegment}/movies/:movieId`]: [
-    (request) => revalidateOnTime(request, { maxAgeMs: 1000 * 20 }),
+    (request) => revalidateOnTime(request, { maxAgeMs: 1000 * 10 }),
   ],
 };

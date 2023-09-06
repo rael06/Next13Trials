@@ -1,4 +1,3 @@
-import { type } from "os";
 import { getDictionary } from "../dictionaries";
 import classes from "./home.page.module.css";
 import SearchBar from "@/app/components/SearchBar";

@@ -10,7 +10,8 @@
     },
     "home": {
       "title": "Accueil",
-      "description": "Bienvenue sur le site de la meilleure application de recherche de films !"
+      "description": "Bienvenue sur le site de la meilleure application de recherche de films !",
+      "search_bar_placeholder": "Rechercher un film..."
     }
   },
   "movies-results": "Voici les résultats de votre recherche :"

@@ -1,5 +1,5 @@
 import classes from "./Header.component.module.css";
-import LocaleSelector from "../LocaleSelector";
+import LocaleSelector from "../../client/LocaleSelector";
 
 export default function Header() {
   return (

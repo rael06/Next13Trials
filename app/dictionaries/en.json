@@ -10,7 +10,8 @@
     },
     "home": {
       "title": "Home",
-      "description": "Welcome to the home page of the movie search app. You can search for movies by title, or by actor."
+      "description": "Welcome to the home page of the movie search app. You can search for movies by title, or by actor.",
+      "search_bar_placeholder": "Search for movies..."
     }
   },
   "movies-results": "Here are the results of your search: "

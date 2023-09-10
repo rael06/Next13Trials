@@ -2,7 +2,7 @@ import { fetchMovie } from "@/app/services/api/tmdb";
 import classes from "./movies.[slug].page.module.css";
 import LocaleHelper, { SupportedLocale } from "@/app/helpers/locale";
 import { getDictionary } from "@/app/(pages)/[locale]/dictionaries";
-import MovieCard from "@/app/components/MovieCard";
+import MovieCard from "@/app/components/client/MovieCard";
 import { notFound } from "next/navigation";
 
 type Props = {

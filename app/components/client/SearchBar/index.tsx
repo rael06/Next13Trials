@@ -3,13 +3,15 @@
 import React, { useContext } from "react";
 import classes from "./SearchBar.component.module.css";
 import { useRouter } from "next/navigation";
-import { LocalStorageContext } from "@/app/contexts/localStorage";
+import { LocalStorageContext } from "@/app/components/client/contexts/LocalStorage";
+import { DictionaryContext } from "@/app/components/client/contexts/Dictionary";
 
 export default function SearchBar() {
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { localeItem } = useContext(LocalStorageContext);
   const locale = localeItem.value;
+  const { dictionary } = React.useContext(DictionaryContext);
 
   const goToSearchResultsPage = React.useCallback(
     (searchText: string) => {
@@ -50,7 +52,7 @@ export default function SearchBar() {
       <input
         ref={searchInputRef}
         type="text"
-        placeholder="Type a movie title..."
+        placeholder={dictionary?.page.home["search_bar_placeholder"]}
         onKeyDown={handleKeyDown}
       />
       <button type="submit">Search</button>

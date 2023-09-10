@@ -1,6 +1,6 @@
+import SearchBar from "@/app/components/client/SearchBar";
 import { getDictionary } from "../dictionaries";
 import classes from "./home.page.module.css";
-import SearchBar from "@/app/components/SearchBar";
 import { SupportedLocale } from "@/app/helpers/locale";
 
 type Props = {
@@ -10,10 +10,10 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props) {
-  const dict = await getDictionary(params.locale);
+  const dictionary = await getDictionary(params.locale);
   return {
-    title: dict.page.home.title,
-    description: dict.page.home.description,
+    title: dictionary.page.home.title,
+    description: dictionary.page.home.description,
   };
 }
 

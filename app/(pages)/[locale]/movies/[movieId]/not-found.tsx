@@ -1,4 +1,4 @@
-import MovieIdFromParams from "@/app/components/MovieIdFromParams";
+import MovieIdFromParams from "@/app/components/client/MovieIdFromParams";
 
 export default function NotFound() {
   return (

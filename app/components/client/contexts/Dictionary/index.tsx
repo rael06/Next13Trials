@@ -1,13 +1,10 @@
 "use client";
 
-import { getDictionary } from "@/app/(pages)/[locale]/dictionaries";
-import LocaleHelper from "@/app/helpers/locale";
-import ParamsHelper from "@/app/helpers/params";
-import { useParams } from "next/navigation";
+import { Dictionary } from "@/app/(pages)/[locale]/dictionaries";
 import React from "react";
 
 type DictionaryContextType = {
-  dictionary: Awaited<ReturnType<typeof getDictionary>> | null;
+  dictionary: Dictionary;
 };
 
 export const DictionaryContext = React.createContext(
@@ -16,29 +13,13 @@ export const DictionaryContext = React.createContext(
 
 type Props = {
   children: React.ReactNode;
+  dictionary: Dictionary;
 };
 
-export default function DictionaryContextProvider({ children }: Props) {
-  const params = useParams();
-
-  const [dictionary, setDictionary] = React.useState<Awaited<
-    ReturnType<typeof getDictionary>
-  > | null>(null);
-
-  React.useEffect(() => {
-    (async () => {
-      if (!params?.locale) return;
-
-      const locale = ParamsHelper.getSingle(params.locale);
-      const supportedLocale = LocaleHelper.retrieveSupportedLocale(locale);
-      const localeResponse = await fetch(
-        "http://localhost:3000/api/locales/" + supportedLocale
-      );
-      const dictionary = await localeResponse.json();
-      setDictionary(dictionary);
-    })();
-  }, [params?.locale]);
-
+export default function DictionaryContextProvider({
+  children,
+  dictionary,
+}: Props) {
   return (
     <DictionaryContext.Provider value={{ dictionary }}>
       {children}

@@ -7,6 +7,7 @@ import Footer from "@/app/components/server/Footer";
 import LocaleHelper from "@/app/helpers/locale";
 import { notFound } from "next/navigation";
 import MainContexts from "@/app/components/client/contexts";
+import { getDictionary } from "./dictionaries";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -22,16 +23,18 @@ type Props = {
   };
 };
 
-export default function RootLayout({ children, params }: Props) {
+export default async function RootLayout({ children, params }: Props) {
   const locale = params.locale;
   if (!LocaleHelper.isLocaleSupported(locale)) {
     notFound();
   }
+  const supportedLocale = LocaleHelper.retrieveSupportedLocale(locale);
+  const dictionary = await getDictionary(supportedLocale);
 
   return (
     <html lang={locale}>
       <body className={rubik.className}>
-        <MainContexts>
+        <MainContexts dictionary={dictionary}>
           <Header />
           <main>{children}</main>
           <Footer />

@@ -3,16 +3,20 @@
 import React from "react";
 import LocalStorageContextProvider from "./LocalStorage";
 import DictionaryContextProvider from "./Dictionary";
+import { Dictionary } from "@/app/(pages)/[locale]/dictionaries";
 
 type Props = {
   children: React.ReactNode;
+  dictionary: Dictionary;
 };
 
-export default function MainContext({ children }: Props) {
+export default function RootContext({ children, dictionary }: Props) {
   return (
     <>
       <LocalStorageContextProvider>
-        <DictionaryContextProvider>{children}</DictionaryContextProvider>
+        <DictionaryContextProvider dictionary={dictionary}>
+          {children}
+        </DictionaryContextProvider>
       </LocalStorageContextProvider>
     </>
   );

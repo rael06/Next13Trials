@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default function Home() {
+export default async function Home({ params }: Props) {
   return (
     <section className={classes.root}>
       <SearchBar />
